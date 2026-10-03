@@ -26,7 +26,7 @@ const MENU_W: f32 = 340.0;
 const MENU_ITEM_H: f32 = 26.0;
 const MENU_GAP: f32 = 10.0;
 
-const COLS: usize = 15;
+const COLS: usize = 12;
 const ROWS: usize = 9;
 const BRICK_W: f32 = 64.0;
 const BRICK_H: f32 = 22.0;

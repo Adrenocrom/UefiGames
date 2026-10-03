@@ -202,7 +202,6 @@ fn main() -> Status {
 
     // Use the current mode; only switch up if it is unusably small.
     let (mut width, mut height) = gop.current_mode_info().resolution();
-    if width < 800 {
         if let Some(mode) = gop.modes().find(|m| m.info().resolution() == (1024, 768)) {
             if gop.set_mode(&mode).is_ok() {
                 let (w, h) = gop.current_mode_info().resolution();
@@ -210,7 +209,6 @@ fn main() -> Status {
                 height = h;
             }
         }
-    }
     if width < MIN_WIDTH || height < MIN_HEIGHT {
         uefi::println!("BrickShot: display {}x{} is too small", width, height);
         return Status::UNSUPPORTED;
