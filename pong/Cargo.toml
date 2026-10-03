@@ -1,0 +1,14 @@
+[package]
+name = "pong"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+uefi = { version = "0.41.0", features = ["alloc", "global_allocator", "panic_handler"] }
+
+# no_std targets cannot unwind; the panic handler must abort.
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
