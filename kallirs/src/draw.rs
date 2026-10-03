@@ -128,22 +128,6 @@ impl Color {
     }
 }
 
-/// Number of decimal digits of `n` (at least 1).
-fn digit_count(n: u32) -> u32 {
-    let mut n = n;
-    let mut d = 1;
-    while n >= 10 {
-        n /= 10;
-        d += 1;
-    }
-    d
-}
-
-/// Pixel width of `prefix` followed by the decimal representation of `n`.
-pub fn num_width(prefix: &str, n: u32) -> u32 {
-    (prefix.len() as u32 + digit_count(n)) * 8
-}
-
 /// A rectangular bitmap sprite that can be blitted to the screen.
 /// Coordinates: `u` right, `v` down, origin at the top-left; `None` marks
 /// transparent pixels.
@@ -276,14 +260,7 @@ impl Screen {
         }
     }
 
-    pub fn fill(&mut self, color: Color) {
-        let px = color.to_blt();
-        for p in self.pixels.iter_mut() {
-            *p = px;
-        }
-    }
-
-    /// Fill an axis-aligned rectangle given in integer pixel coordinates.
+        /// Fill an axis-aligned rectangle given in integer pixel coordinates.
     /// Coordinates are clipped to the screen, so out-of-range values are safe.
     pub fn rect(&mut self, x: u32, y: u32, w: u32, h: u32, color: Color) {
         let x0 = x.min(self.width);
@@ -295,11 +272,6 @@ impl Screen {
             let row = yy as usize * self.width as usize;
             self.pixels[row + x0 as usize..row + x1 as usize].fill(px);
         }
-    }
-
-    /// Fill an axis-aligned rectangle given in float coordinates (game space).
-    pub fn rect_f(&mut self, x: f32, y: f32, w: f32, h: f32, color: Color) {
-        self.rect(x as u32, y as u32, w as u32, h as u32, color);
     }
 
     /// Fill a circle (used for the ball).

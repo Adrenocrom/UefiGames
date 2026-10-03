@@ -2,7 +2,7 @@
 # Build Kallirs, pack it into a small FAT image and boot it in QEMU.
 set -euo pipefail
 
-EFI=target/x86_64-unknown-uefi/release/kallirs.efi
+EFI=../target/x86_64-unknown-uefi/release/kallirs.efi
 # OVMF (UEFI firmware) location; override with OVMF=... ./run.sh.
 # Debian/Ubuntu: /usr/share/OVMF/OVMF_CODE.fd
 OVMF="${OVMF:-/usr/share/edk2/x64/OVMF.4m.fd}"
